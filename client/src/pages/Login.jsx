@@ -11,7 +11,7 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-100 to-purple-100">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-black via-red-900 to-black">
       <form onSubmit={handleSubmit} className="bg-white p-8 rounded-xl shadow-md w-full max-w-md">
         <h2 className="text-2xl font-bold mb-6 text-center text-indigo-700">Sign In</h2>
         <div className="mb-4">

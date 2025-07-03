@@ -18,7 +18,7 @@ const CookieAlert = () => {
   if (!visible) return null;
 
   return (
-    <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-gray-900 text-white px-6 py-3 rounded-lg shadow-lg flex items-center space-x-4 z-50 animate-fade-in">
+    <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-gradient-to-br from-black via-red-900 to-black text-white px-6 py-3 rounded-lg shadow-lg flex items-center space-x-4 z-50 animate-fade-in">
       <span className="text-sm">This website uses cookies to enhance the user experience. By continuing, you accept our cookie policy.</span>
       <button
         onClick={handleAccept}

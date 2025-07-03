@@ -2,6 +2,9 @@ import { Hero } from "../components/Hero";
 import { Integrations } from "../components/Integrations";
 import Order from "../components/Order";
 import Testimonials from "../components/Testimonials";
+import React, { useEffect, useRef } from "react";
+import { gsap } from "gsap";
+
 const orders = [
   {
     platform: "Amazon",
@@ -20,22 +23,36 @@ const orders = [
 ];
 
 const Home = () => {
+  const sectionRef = useRef(null);
+  const cardRefs = useRef([]);
+
+  useEffect(() => {
+    gsap.fromTo(
+      sectionRef.current,
+      { opacity: 0, y: 40 },
+      { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" }
+    );
+    gsap.fromTo(
+      cardRefs.current,
+      { opacity: 0, y: 30 },
+      { opacity: 1, y: 0, duration: 0.7, delay: 0.3, stagger: 0.15, ease: "power2.out" }
+    );
+  }, []);
+
   return (
-    <div className="min-h-screen bg-gray-100 p-4">
+    <div className="min-h-screen bg-gradient-to-br from-black via-red-900 to-black p-4">
       {/* Hero Section */}
-      <Hero/>
-      
+      <Hero />
+
+      {/* Integrations Section */}
+      <div className="my-12">
+        <Integrations />
+      </div>
 
       {/* Testimonials Section */}
-      <Integrations/>
       <Testimonials />
 
-      <h1 className="text-2xl font-bold mb-4" id="orders">Your Orders</h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {orders.map((order, index) => (
-          <Order key={index} {...order} />
-        ))}
-      </div>
+      
     </div>
   );
 };

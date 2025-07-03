@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { gsap } from "gsap";
+import OrderNestLogo from "../assets/icons/ordernest.png";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -26,21 +27,31 @@ const Navbar = () => {
     }
   }, [menuOpen]);
 
+  function navLinkClass({ isActive }) {
+    return (
+      "font-medium transition-colors duration-150 px-1 md:px-0 " +
+      (isActive
+        ? "text-red-500 text-lg font-bold border-b-2 border-red-500 md:border-none"
+        : "hover:text-red-400 text-base text-[#8b8b8b]")
+    );
+  }
+
   return (
     <nav
       ref={navRef}
-      className="bg-white shadow-md py-5 px-6 text-black"
+      className="bg-black/80 shadow-md px-6 text-[#8b8b8b] border-b-2 border-red-900 backdrop-blur-md"
     >
       <div className="container mx-auto flex items-center justify-between">
-        <div className=" text-2xl font-bold tracking-wide flex items-center">
-          <span className="mr-2">🛒</span> OrderNest
+        <div className="flex items-center text-2xl font-bold tracking-wide text-[#8b8b8b]">
+          <img src={OrderNestLogo} alt="OrderNest Logo" className="w-20 h-20 rounded-full mr-2 " />
+          OrderNest
         </div>
         {/* Desktop Menu */}
         <div className="hidden md:flex space-x-6 items-center">
-          <Link to="/" className=" hover:text-indigo-200 font-medium transition-colors duration-150">Home</Link>
-          <Link to="/orders" className=" hover:text-indigo-200 font-medium transition-colors duration-150">Orders</Link>
-          <Link to="/profile" className=" hover:text-indigo-200 font-medium transition-colors duration-150">Profile</Link>
-          <Link to="/about" className=" hover:text-indigo-200 font-medium transition-colors duration-150">About</Link>
+          <NavLink to="/" className={navLinkClass} end>Home</NavLink>
+          <NavLink to="/orders" className={navLinkClass}>Orders</NavLink>
+          <NavLink to="/profile" className={navLinkClass}>Profile</NavLink>
+          <NavLink to="/about" className={navLinkClass}>About</NavLink>
         </div>
         {/* Mobile Hamburger */}
         <button
@@ -48,7 +59,7 @@ const Navbar = () => {
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Toggle menu"
         >
-          <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <svg className="w-7 h-7 text-[#8b8b8b]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
           </svg>
         </button>
@@ -57,12 +68,12 @@ const Navbar = () => {
       {menuOpen && (
         <div
           ref={mobileMenuRef}
-          className="md:hidden mt-2 flex flex-col space-y-2 shadow p-4 animate-fade-in"
+          className="md:hidden mt-2 flex flex-col space-y-2  p-4 animate-fade-in text-[#8b8b8b]"
         >
-          <Link to="/" className=" hover:text-indigo-200 font-medium transition-colors duration-150" onClick={() => setMenuOpen(false)}>Home</Link>
-          <Link to="/orders" className=" hover:text-indigo-200 font-medium transition-colors duration-150" onClick={() => setMenuOpen(false)}>Orders</Link>
-          <Link to="/profile" className=" hover:text-indigo-200 font-medium transition-colors duration-150" onClick={() => setMenuOpen(false)}>Profile</Link>
-          <Link to="/about" className=" hover:text-indigo-200 font-medium transition-colors duration-150" onClick={() => setMenuOpen(false)}>About</Link>
+          <NavLink to="/" className={navLinkClass} end onClick={() => setMenuOpen(false)}>Home</NavLink>
+          <NavLink to="/orders" className={navLinkClass} onClick={() => setMenuOpen(false)}>Orders</NavLink>
+          <NavLink to="/profile" className={navLinkClass} onClick={() => setMenuOpen(false)}>Profile</NavLink>
+          <NavLink to="/about" className={navLinkClass} onClick={() => setMenuOpen(false)}>About</NavLink>
         </div>
       )}
     </nav>

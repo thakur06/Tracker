@@ -1,8 +1,48 @@
+/* === THEME COLORS === */
+:root {
+  --primary: #e53935; /* Red */
+  --primary-dark: #b71c1c; /* Dark Red */
+  --accent: #fff; /* White */
+  --bg: #000; /* Black */
+  --text-main: #fff; /* White */
+  --text-secondary: #e53935; /* Red */
+}
+
+body, html {
+  background: var(--bg);
+  color: var(--text-main);
+}
+
+.bg-primary {
+  background-color: var(--primary) !important;
+}
+.bg-primary-dark {
+  background-color: var(--primary-dark) !important;
+}
+.text-primary {
+  color: var(--primary) !important;
+}
+.text-accent {
+  color: var(--accent) !important;
+}
+
+/* Update scrollbars for dark background */
+html::-webkit-scrollbar, body::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}
+html, body {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  background: var(--bg);
+  color: var(--text-main);
 }
 
 .logo {
@@ -12,10 +52,10 @@
   transition: filter 300ms;
 }
 .logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+  filter: drop-shadow(0 0 2em #e53935aa);
 }
 .logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+  filter: drop-shadow(0 0 2em #fff);
 }
 
 @keyframes logo-spin {
@@ -35,20 +75,15 @@
 
 .card {
   padding: 2em;
+  background: #111;
+  color: #fff;
+  border: 1px solid #e53935;
 }
 
 .read-the-docs {
-  color: #888;
+  color: #e53935;
 }
 
-/* Hide vertical scrollbar for Chrome, Safari, and Opera */
-html::-webkit-scrollbar, body::-webkit-scrollbar {
-  width: 0px;
-  background: transparent;
-}
-
-/* Hide vertical scrollbar for IE, Edge, and Firefox */
-html, body {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;     /* Firefox */
+.text-steel {
+  color: #3a4750 !important;
 }
