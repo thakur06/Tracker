@@ -11,7 +11,7 @@ const statusColors = {
 const Orders = ({ platform, product, price, deliveryDate, status }) => {
   const badgeColor = statusColors[status] || statusColors.default;
   return (
-    <div className="bg-gradient-to-br from-black via-red-900 to-black shadow-lg rounded-xl p-5 border border-red-400 hover:shadow-xl transition-shadow duration-200">
+    <div className="bg-gradient-to-br from-black via-red-900 to-black  p-5  hover:shadow-xl transition-shadow duration-200 min-h-screen">
       <h2 className="font-bold text-xl text-gray-800 mb-1">{product}</h2>
       <p className="text-indigo-500 font-semibold mb-2">{platform}</p>
       <p className="text-gray-700 text-sm mb-1">Price: <span className="font-medium">{price}</span></p>

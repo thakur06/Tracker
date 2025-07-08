@@ -63,13 +63,13 @@ export const Hero = () => {
           <div className="flex justify-center md:justify-start gap-4 mb-10">
             {platforms.map((platform, i) => (
               <span
-                key={platform.name}
-                ref={el => (badgesRef.current[i] = el)}
-                className="flex items-center gap-2 px-5 py-2 bg-white border border-red-400 rounded-full text-base  hover:scale-105 transition-transform duration-200 font-semibold text-black"
-              >
-                <img src={platform.icon} alt={platform.name} className="w-7 h-7" />
-                {platform.name}
-              </span>
+              key={platform.name}
+              ref={el => (badgesRef.current[i] = el)}
+              className="flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 bg-white border border-red-400 rounded-full text-xs sm:text-base hover:scale-105 transition-transform duration-200 font-semibold text-black"
+            >
+              <img src={platform.icon} alt={platform.name} className="w-8 h-8 sm:w-10 sm:h-10" />
+              {/* {platform.name} */}
+            </span>
             ))}
           </div>
           <button
