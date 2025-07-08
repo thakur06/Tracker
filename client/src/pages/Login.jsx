@@ -1,13 +1,43 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { signInWithPopup, auth, provider } from '../firebase';
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
     // Handle login logic here
+  };
+
+  const handleGoogleSignIn = async () => {
+    setLoading(true);
+    setError("");
+    try {
+      const result = await signInWithPopup(auth, provider);
+      const user = result.user;
+      console.log('Google user:', user);
+      // Save user to backend
+      await fetch('/api/user/save', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          uid: user.uid,
+          name: user.displayName,
+          email: user.email,
+          photoURL: user.photoURL,
+          provider: user.providerData[0]?.providerId || 'google',
+        })
+      });
+      // Optionally redirect or store user info here
+    } catch (err) {
+      setError("Google Sign-In failed. Please try again.");
+      console.error('Google Sign-In Error:', err);
+    }
+    setLoading(false);
   };
 
   return (
@@ -42,6 +72,15 @@ const Login = () => {
         >
           Sign In
         </button>
+        <button
+          type="button"
+          onClick={handleGoogleSignIn}
+          className="w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition-colors mb-4"
+        >
+          Sign in with Google
+        </button>
+        {loading && <p className="text-center text-sm text-gray-600">Signing in...</p>}
+        {error && <p className="text-center text-sm text-red-600">{error}</p>}
         <p className="text-center text-sm text-gray-600">
           Don't have an account?{' '}
           <Link to="/signup" className="text-indigo-600 hover:underline">Sign Up</Link>

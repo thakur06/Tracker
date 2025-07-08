@@ -1,24 +1,58 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-const statusColors = {
-  Shipped: "bg-green-100 text-green-700",
-  "Out for Delivery": "bg-yellow-100 text-yellow-700",
-  Delivered: "bg-blue-100 text-blue-700",
-  Cancelled: "bg-red-100 text-red-700",
-  default: "bg-gray-200 text-gray-700",
-};
+const Orders = () => {
+  const [orders, setOrders] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
-const Orders = ({ platform, product, price, deliveryDate, status }) => {
-  const badgeColor = statusColors[status] || statusColors.default;
+  // Replace this with your actual user email logic
+  const userEmail = "bioguest94@gmail.com";
+
+  const fetchOrders = async () => {
+    setLoading(true);
+    setError("");
+    try {
+      const res = await fetch(`http://localhost:5000/api/gmail/orders/fetch-gmail?userEmail=${encodeURIComponent(userEmail)}`);
+      const data = await res.json();
+      if (res.ok) {
+        setOrders(data.orders || []);
+      } else {
+        setError("Failed to fetch orders.");
+      }
+    } catch (err) {
+      setError("Network error."+err);
+    }
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    fetchOrders();
+  }, []);
+
   return (
-    <div className="bg-gradient-to-br from-black via-red-900 to-black  p-5  hover:shadow-xl transition-shadow duration-200 min-h-screen">
-      <h2 className="font-bold text-xl text-gray-800 mb-1">{product}</h2>
-      <p className="text-indigo-500 font-semibold mb-2">{platform}</p>
-      <p className="text-gray-700 text-sm mb-1">Price: <span className="font-medium">{price}</span></p>
-      <p className="text-gray-700 text-sm mb-2">Delivery Date: <span className="font-medium">{deliveryDate}</span></p>
-      <span className={`inline-block mt-2 text-xs px-3 py-1 rounded-full font-semibold ${badgeColor}`}>
-        {status}
-      </span>
+    <div className="p-8">
+      <h1 className="text-2xl font-bold mb-4">Your Orders</h1>
+      {loading && <p>Loading orders...</p>}
+      {error && <p className="text-red-600">{error}</p>}
+      {orders.length === 0 && !loading && <p>No orders found.</p>}
+      <ul>
+        {orders.map((order, idx) => (
+          <li key={order.orderId || idx} className="mb-4 p-4 border rounded bg-white/80">
+            <div><strong>Platform:</strong> {order.platform}</div>
+            <div><strong>Order ID:</strong> {order.orderId}</div>
+            <div><strong>Delivery Date:</strong> {order.deliveryDate}</div>
+            <div><strong>Status:</strong> {order.status}</div>
+            <div><strong>Items:</strong> {order.items && order.items.map(item => item.name).join(", ")}</div>
+          </li>
+        ))}
+      </ul>
+      <button
+        onClick={fetchOrders}
+        className="mt-4 bg-blue-600 text-white px-4 py-2 rounded"
+        disabled={loading}
+      >
+        Refresh Orders from Gmail
+      </button>
     </div>
   );
 };

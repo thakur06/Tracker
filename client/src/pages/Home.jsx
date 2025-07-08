@@ -1,26 +1,9 @@
 import { Hero } from "../components/Hero";
 import { Integrations } from "../components/Integrations";
-import Order from "../components/Order";
 import Testimonials from "../components/Testimonials";
 import React, { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 
-const orders = [
-  {
-    platform: "Amazon",
-    product: "Apple AirPods Pro",
-    price: "₹19,990",
-    deliveryDate: "2025-07-02",
-    status: "Shipped",
-  },
-  {
-    platform: "Flipkart",
-    product: "Nike Shoes",
-    price: "₹5,499",
-    deliveryDate: "2025-07-01",
-    status: "Out for Delivery",
-  },
-];
 
 const Home = () => {
   const sectionRef = useRef(null);

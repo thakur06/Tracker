@@ -53,7 +53,7 @@ export const Hero = () => {
         <div className="flex-1 text-center md:text-left">
           <h1
             ref={headingRef}
-            className="text-5xl p-2 md:text-7xl font-extrabold mb-10 lg bg-gradient-to-r from-red-600 via-black to-white bg-clip-text text-transparent tracking-tight font-['Roboto_Slab','serif']"
+            className="text-5xl p-2 md:text-7xl font-extrabold mb-10  bg-gradient-to-r from-red-600 via-black to-white bg-clip-text text-transparent tracking-tight font-['Roboto_Slab','serif']"
           >
             Smarter Order Tracking.
           </h1>
