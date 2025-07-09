@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-
+import Ana from "../assets/users/tim.jpg"
 // Mock testimonials data
 const testimonials = [
   {
@@ -7,7 +7,7 @@ const testimonials = [
     name: "Amit Sharma",
     platform: "Amazon & Flipkart",
     feedback: "OrderNest made it so easy to track all my orders in one place. No more searching through emails! The real-time notifications are amazing.",
-    avatar: "https://randomuser.me/api/portraits/men/32.jpg",
+    avatar: Ana,
     rating: 5,
     location: "Mumbai, India",
     orderCount: "150+ orders tracked"
